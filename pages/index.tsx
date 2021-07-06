@@ -1,14 +1,17 @@
+import { GetServerSideProps } from 'next';
 import { FormEvent, useState } from 'react';
 
 import { useAuth } from '../hooks/useAuth';
 
 import styles from '../styles/Home.module.css';
 
+import { withSSRGuest } from '../utils/withSSRGuest';
+
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { isAuthenticated, signIn } = useAuth();
+  const { signIn } = useAuth();
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -39,3 +42,9 @@ export default function Home() {
     </form>
   );
 }
+
+export const getServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {},
+  };
+});

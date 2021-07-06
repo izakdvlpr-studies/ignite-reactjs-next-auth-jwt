@@ -11,10 +11,7 @@ export default function Dashboard() {
   const { user } = useAuth();
 
   useEffect(() => {
-    api
-      .get('/me')
-      .then(response => console.log(response.data))
-      .catch(err => console.error(err));
+    api.get('/me').then(response => console.log(response.data));
   }, []);
 
   return <h1>Dashboard: {user?.email}</h1>;
